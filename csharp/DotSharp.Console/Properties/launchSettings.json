@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "DotSharp.Console": {
+      "commandName": "Project",
+      "commandLineArgs": "test.txt"
+    }
+  }
+}

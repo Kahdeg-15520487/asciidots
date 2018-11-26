@@ -8,6 +8,7 @@ namespace DotSharp
         public int Value { get; set; }
         public Action<Dot, DotCell> OnEnterCell { get; set; }
         public object MetaData { get; set; }
+        public bool IsStepped { get; set; }
 
         public Dot(int id, int value)
         {
@@ -15,6 +16,7 @@ namespace DotSharp
             Value = value;
             OnEnterCell = null;
             MetaData = null;
+            IsStepped = false;
         }
         public Dot()
         {
@@ -22,6 +24,7 @@ namespace DotSharp
             Value = 0;
             OnEnterCell = null;
             MetaData = null;
+            IsStepped = false;
         }
         public override string ToString()
         {

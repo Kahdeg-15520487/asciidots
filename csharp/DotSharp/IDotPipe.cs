@@ -1,6 +1,6 @@
 namespace DotSharp
 {
-    public interface IDotOp
+    public interface IDotPipe
     {
         /// <summary>
         /// the symbol of this dot cell

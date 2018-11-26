@@ -25,9 +25,17 @@ namespace DotSharp
         public Dot Down { get; set; }
 
         /// <summary>
+        /// for temporary holding a dot, maybe forever
+        /// </summary>
+        public Dot Hold { get; set; }
+
+        /// <summary>
         /// is this dot cell active
         /// </summary>
-        public bool IsActive => Left != null || Right != null || Up != null || Down != null;
+        public bool IsActive => (Left != null && !Left.IsStepped)
+                             || (Right != null && !Right.IsStepped)
+                             || (Up != null && !Up.IsStepped)
+                             || (Down != null && !Down.IsStepped);
 
         public DotCell(char symbol = ' ')
         {

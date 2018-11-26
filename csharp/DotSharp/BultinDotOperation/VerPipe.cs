@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DotSharp.BultinDotOperation
 {
-    public class VerPipeDotOp : IDotOp
+    public class VerPipe : IDotPipe
     {
         public char Symbol => '|';
 

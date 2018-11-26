@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DotSharp.BultinDotOperation
 {
-    public class StartDot : IDotOp
+    public class StartPipe : IDotPipe
     {
         public char Symbol => '.';
 

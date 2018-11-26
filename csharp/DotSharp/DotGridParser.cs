@@ -27,7 +27,7 @@ namespace DotSharp
 
         public static (char[,] data, int width, int height) Split2D(string str)
         {
-            var data = str.Split('\n').Select(line => line.ToCharArray()).ToList();
+            var data = str.Replace("\r\n", "\n").Replace("\n\r", "\n").Split('\n').Select(line => line.ToCharArray()).ToList();
 
             var width = data.Max(line => line.Length);
             var height = data.Count;

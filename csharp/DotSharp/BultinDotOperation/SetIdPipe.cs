@@ -1,11 +1,8 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 
 namespace DotSharp.BultinDotOperation
 {
-    public class SetIdDot : IDotOp
+    public class SetIdPipe : IDotPipe
     {
         public char Symbol => '@';
 

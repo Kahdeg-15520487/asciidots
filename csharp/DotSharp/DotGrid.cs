@@ -9,16 +9,16 @@ namespace DotSharp
         private readonly int GridWidth;
 
         public DotCell[,] Grid { get; private set; }
-        public Dictionary<char, IDotOp> DotOps { get; private set; }
+        public Dictionary<char, IDotPipe> DotOps { get; private set; }
         public DotGrid(int width, int height)
         {
             GridHeight = height;
             GridWidth = width;
             Grid = new DotCell[width, height];
-            DotOps = new Dictionary<char, IDotOp>();
+            DotOps = new Dictionary<char, IDotPipe>();
         }
 
-        public void RegisterDotOperation(params IDotOp[] dotOps)
+        public void RegisterDotOperation(params IDotPipe[] dotOps)
         {
             foreach (var dotOp in dotOps)
             {
@@ -65,8 +65,10 @@ namespace DotSharp
             {
                 for (int x = 0; x < GridWidth; x++)
                 {
+                    //Console.WriteLine(Grid[x, y].IsActive);
                     if (Grid[x, y].IsActive)
                     {
+                        Grid[x, y].AnyPort().dot.IsStepped = true;
                         var (left, right, up, down) = Grid.GetSurround(GridWidth, GridHeight, x, y);
                         var cell = Grid[x, y];
                         var symbol = cell.Symbol;
@@ -74,7 +76,7 @@ namespace DotSharp
                         if (DotOps.ContainsKey(symbol))
                         {
                             var dotOp = DotOps[symbol];
-                            isAnyDotActive = dotOp.Execute(cell, left, right, up, down);
+                            isAnyDotActive |= dotOp.Execute(cell, left, right, up, down);
                         }
                         else
                         {
@@ -85,12 +87,23 @@ namespace DotSharp
                                 var (dot, dir) = cell.AnyPort();
                                 cell.ResetPort();
 
-                                dot?.OnEnterCell(dot, cell);
+                                dot.OnEnterCell?.Invoke(dot, cell);
 
-                                isAnyDotActive = dot.Pipe(dir, left, right, up, down);
+                                isAnyDotActive |= dot.Pipe(dir, left, right, up, down);
+                            }
+                            else
+                            {
+                                throw new InvalidOperationException(symbol.ToString());
                             }
                         }
                     }
+                }
+            }
+            for (int y = 0; y < GridHeight; y++)
+            {
+                for (int x = 0; x < GridWidth; x++)
+                {
+                    Grid[x, y].AnyPort().dot.IsStepped = false;
                 }
             }
             return isAnyDotActive;

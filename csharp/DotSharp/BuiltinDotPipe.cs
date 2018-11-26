@@ -1,6 +1,6 @@
 namespace DotSharp
 {
-    public enum BuiltinDotOp
+    public enum BuiltinDotPipe
     {
         nop,
         start,

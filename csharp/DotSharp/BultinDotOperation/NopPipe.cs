@@ -1,6 +1,6 @@
 namespace DotSharp.BuiltinDotOperation
 {
-    public class NopDotOp : IDotOp
+    public class NopPipe : IDotPipe
     {
         public char Symbol => ' ';
 

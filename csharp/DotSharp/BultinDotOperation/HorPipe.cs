@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DotSharp.BultinDotOperation
 {
-    public class HorPipeDotOp : IDotOp
+    public class HorPipe : IDotPipe
     {
         public char Symbol => '-';
 
